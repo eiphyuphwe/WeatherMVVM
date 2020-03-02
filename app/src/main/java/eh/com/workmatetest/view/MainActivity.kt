@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity(),ProgressDialogFragment.OnCompleteListen
 
     fun setdata(staffInfo: StaffInfo) {
         txtName.setText(staffInfo.client.name)
-        txtCTitle.setText( staffInfo.location.address.country.currency_code+ Utils.convertRoundMode(staffInfo.wage_amount.toDouble()))
+        txtCTitle.setText( staffInfo.client.country.currency_code+ Utils.convertRoundMode(staffInfo.wage_amount.toDouble()))
         txtClientName.setText(staffInfo.client.name)
         txtAddress.setText(staffInfo.location.address.street_1)
         txtWagesType.setText(staffInfo.wage_type)
