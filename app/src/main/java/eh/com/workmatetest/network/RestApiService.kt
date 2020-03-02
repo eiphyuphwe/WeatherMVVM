@@ -19,14 +19,14 @@ interface RestApiService {
 
     @FormUrlEncoded
     @POST("26074/clock-in/")
-    fun postClockIn(@Field("latitude")latitude:Double,
-                    @Field("longitude")longitude:Double):Observable<ClockInResponse>
+    fun postClockIn(@Field("latitude")latitude:Double?,
+                    @Field("longitude")longitude:Double?):Observable<ClockInResponse>
 
 
     @FormUrlEncoded
     @POST("26074/clock-out/")
-    fun postClockOut(@Field("latitude")latitude:Double,
-                    @Field("longitude")longitude:Double):Observable<ClockOut>
+    fun postClockOut(@Field("latitude")latitude:Double?,
+                    @Field("longitude")longitude:Double?):Observable<ClockOut>
 
 
 
