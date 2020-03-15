@@ -15,9 +15,12 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 import eh.com.currencyexchangeapp.network.RestApiService;
+import eh.com.spweathertest.database.WeatherDAO;
+import eh.com.spweathertest.model.Country;
 import eh.com.spweathertest.model.Result;
 import eh.com.spweathertest.model.SearchApi;
 import eh.com.spweathertest.model.SearchResponse;
@@ -40,6 +43,8 @@ public class MainViewModelUnitTest {
 
     @Mock
     private Application mApplicationContext;
+    @Mock
+    WeatherDAO weatherDAO;
 
 
 
@@ -55,6 +60,8 @@ public class MainViewModelUnitTest {
     Observable<WeatherResponse> weatherResponseObservable;
     @Mock
     androidx.lifecycle.Observer<SearchResponse> searchResponseObserver;
+    @Mock
+    androidx.lifecycle.Observer<List<Country>> countryObserver;
     @Mock
     Observer<WeatherResponse> weatherResponseObserver;
 
@@ -79,7 +86,7 @@ public class MainViewModelUnitTest {
     {
         MockitoAnnotations.initMocks(this);
         weatherReposistory = new WeatherReposistory(mApplicationContext);
-        //databaseReposistory = new DatabaseReposistory(mApplicationContext);
+       // databaseReposistory = new DatabaseReposistory(mApplicationContext.getApplicationContext());
         viewModel = new MainViewModel(mApplicationContext);
 
 
@@ -121,10 +128,22 @@ public class MainViewModelUnitTest {
     }
 
     @Test
-    public void FetchNull()
+    public void saveDataAndGetCountryFromDB()
     {
         String key="d3b2c206cdfe43e4bf0140120201203";
-      //  when(apiService.getSearch(key,""))
+        long time = 1355557;
+        List<Country> countryList = new ArrayList<>();
+
+        final Country country = new Country(0,"Yangon","Myanmar","Myanmar",
+                "100.00","100.00",time);
+        countryList.add(country);
+
+        weatherDAO.insertAll(country);
+        weatherDAO.insertAll(null);
+        //weatherDAO.getAll().
+        weatherDAO.delete(country);
+
+
     }
 
 
