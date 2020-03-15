@@ -34,8 +34,6 @@ import io.reactivex.android.plugins.RxAndroidPlugins;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
-import static org.mockito.Mockito.when;
-
 @RunWith(MockitoJUnitRunner.class)
 public class MainViewModelUnitTest {
 
@@ -86,7 +84,7 @@ public class MainViewModelUnitTest {
     {
         MockitoAnnotations.initMocks(this);
         weatherReposistory = new WeatherReposistory(mApplicationContext);
-       // databaseReposistory = new DatabaseReposistory(mApplicationContext.getApplicationContext());
+        databaseReposistory = new DatabaseReposistory(weatherDAO);
         viewModel = new MainViewModel(mApplicationContext);
 
 
@@ -98,7 +96,7 @@ public class MainViewModelUnitTest {
         String key="d3b2c206cdfe43e4bf0140120201203";
          SearchResponse searchResponse = searchResponse = new SearchResponse(new SearchApi(new ArrayList<Result>()));
 
-      when(apiService.getSearch(key,"","json")).thenReturn(searchResponseObservable);
+      //when(apiService.getSearch(key,"","json")).thenReturn(searchResponseObservable);
 
 
        viewModel.search("japan","json").observeForever(searchResponseObserver);
@@ -116,7 +114,7 @@ public class MainViewModelUnitTest {
         String key="d3b2c206cdfe43e4bf0140120201203";
         SearchResponse searchResponse = searchResponse = new SearchResponse(new SearchApi(new ArrayList<Result>()));
 
-        when(apiService.getWeather(key,"","json")).thenReturn(weatherResponseObservable);
+        //when(apiService.getWeather(key,"","json")).thenReturn(weatherResponseObservable);
 
 
         viewModel.loadDetailLocalWeather("japan","json").observeForever(weatherResponseObserver);

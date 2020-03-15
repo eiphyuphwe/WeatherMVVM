@@ -3,17 +3,16 @@ package eh.com.spweathertest.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import eh.com.spweathertest.model.Country
 import eh.com.spweathertest.model.SearchResponse
 import eh.com.spweathertest.model.WeatherResponse
-import eh.com.spweathertest.reposistories.DatabaseReposistory
 import eh.com.spweathertest.reposistories.WeatherReposistory
 
 class MainViewModel (val app:Application) : AndroidViewModel(app)
 {
 
     var reposistory: WeatherReposistory?=null
-    var dbRespo: DatabaseReposistory?=null
+  //  var dbRespo: DatabaseReposistory?=null
+   // var dAO:WeatherDAO?=null
 
 
 
@@ -21,7 +20,8 @@ class MainViewModel (val app:Application) : AndroidViewModel(app)
     init {
 
         reposistory = WeatherReposistory(app)
-       // dbRespo = DatabaseReposistory(app)
+      //  dAO = AppDatabase.getDatabase(app).weatherDAO()
+        //dbRespo = DatabaseReposistory(dAO!!)
 
 
     }
@@ -36,7 +36,7 @@ class MainViewModel (val app:Application) : AndroidViewModel(app)
         return reposistory?.loadDetailLocalWeather(q,format)
     }
 
-    fun loadCountryAll(): MutableLiveData<List<Country>>?
+   /* fun loadCountryAll(): MutableLiveData<List<Country>>?
     {
         return dbRespo!!.getAll()
     }
@@ -49,7 +49,7 @@ class MainViewModel (val app:Application) : AndroidViewModel(app)
     fun saveCountry(country: Country)
     {
         dbRespo!!.addCountry(country)
-    }
+    }*/
 
 
 

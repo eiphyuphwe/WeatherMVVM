@@ -1,8 +1,6 @@
 package eh.com.spweathertest.reposistories
 
-import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import eh.com.spweathertest.database.AppDatabase
 import eh.com.spweathertest.database.WeatherDAO
 import eh.com.spweathertest.model.Country
 import io.reactivex.Completable
@@ -13,13 +11,13 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
-class DatabaseReposistory(app:Application) {
+class DatabaseReposistory(dao: WeatherDAO) {
 
     var mutableCountry: MutableLiveData<Country>? = null
     var mutableCountryList: MutableLiveData<List<Country>>?=null
     var wDAO:WeatherDAO?=null
     init {
-        this.wDAO = AppDatabase.getDatabase(app.applicationContext).weatherDAO()
+        this.wDAO = dao
         mutableCountry = MutableLiveData()
         mutableCountryList = MutableLiveData()
     }

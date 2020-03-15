@@ -17,7 +17,6 @@ import eh.com.spweathertest.database.WeatherDAO
 import eh.com.spweathertest.model.Country
 import eh.com.spweathertest.model.Result
 import eh.com.spweathertest.model.SearchResponse
-import eh.com.spweathertest.reposistories.DatabaseReposistory
 import eh.com.spweathertest.reposistories.WeatherReposistory
 import eh.com.spweathertest.viewmodel.MainViewModel
 import eh.com.weathertest.adapters.RecyclerAdapter
@@ -44,15 +43,15 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener,OnItemC
 
 
 
-    var dbRepo : DatabaseReposistory?=null
+
        var weatherReposistory:WeatherReposistory?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        dbRepo = DatabaseReposistory(application)
+
         weatherReposistory = WeatherReposistory(application)
-       dAO=  AppDatabase.getDatabase(applicationContext).weatherDAO()
+        dAO=  AppDatabase.getDatabase(applicationContext).weatherDAO()
         adapter = RecyclerAdapter(cList,this,this)
         rcyList?.adapter = adapter
 
@@ -192,20 +191,39 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener,OnItemC
        fun getAllCountries()
        {
 
-           mainViewModel!!.loadCountryAll()!!.observe(this, Observer {
 
-               var list = it
-               if(list!=null) {
-                   cList = list as ArrayList<Country>
-                   adapter = RecyclerAdapter(cList, this,this)
-                   rcyList?.adapter = adapter
-               }
-           })
+           dAO!!.getAll()!!
+               .subscribeOn(Schedulers.io())
+               .observeOn(AndroidSchedulers.mainThread())
+               .subscribe(object : MaybeObserver<List<Country>?> {
+                   override fun onSubscribe(d: Disposable) {}
 
-//hello
+                   override fun onError(e: Throwable) {}
+                   override fun onComplete() {
+
+
+
+                   }
+                   override fun onSuccess(t: List<Country>) {
+
+                       var list = t
+                       if(list!=null) {
+                           cList = list as ArrayList<Country>
+                           setAdapter(cList)
+
+                       }
+
+                   }
+               })
 
        }
 
+       fun setAdapter(cList:List<Country>?)
+       {
+           cList as ArrayList<Country>
+           adapter = RecyclerAdapter(cList, this,this)
+           rcyList?.adapter = adapter
+       }
 
        fun addCountry(ctr: Country) {
            Completable.fromAction {

@@ -49,6 +49,7 @@ class DetailActivity : AppCompatActivity() {
                         txt_tempc.setText(detailResponse!!.data.currentCondition.get(0).tempC+"\u2103")
                         txt_tempF.setText(detailResponse!!.data.currentCondition.get(0).tempF+ "\u2109")
                         txtDesp.setText(detailResponse!!.data.currentCondition.get(0).weatherDesc.get(0).value)
+                        txthumidity.setText(detailResponse!!.data.currentCondition.get(0).humidity+"%")
                     }
                 })
             }
