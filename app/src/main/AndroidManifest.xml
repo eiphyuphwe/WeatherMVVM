@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="eh.com.workmatetest">
+    package="eh.com.spweathertest">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.MainActivity"
+        <activity android:name="eh.com.spweathertest.view.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,6 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="eh.com.spweathertest.view.DetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
     </application>
 
 </manifest>

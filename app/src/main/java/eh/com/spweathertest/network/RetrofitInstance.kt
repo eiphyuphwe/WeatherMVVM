@@ -1,7 +1,7 @@
 package eh.com.currencyexchangeapp.network
 
 
-import eh.com.workmatetest.BuildConfig
+import eh.com.spweathertest.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
-    var BASE_URL = "https://api.helpster.tech/v1/staff-requests/"
+    var BASE_URL = "https://api.worldweatheronline.com/premium/v1/"
     private const val NETWORK_CALL_TIMEOUT = 60
     private var retrofit: Retrofit? = null
    public val apiService: RestApiService
@@ -19,7 +19,7 @@ object RetrofitInstance {
                 retrofit = Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(OkHttpClient.Builder()
-                        .addInterceptor(SupportInterceptor())
+                       // .addInterceptor(SupportInterceptor())
                         .addInterceptor(HttpLoggingInterceptor()
                             .apply {
                                 level = if (BuildConfig.DEBUG)

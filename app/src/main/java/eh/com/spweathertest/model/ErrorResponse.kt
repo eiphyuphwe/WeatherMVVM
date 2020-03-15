@@ -1,4 +1,4 @@
-package eh.com.workmatetest.model
+package eh.com.spweathertest.model
 
 class ErrorResponse {
     var code = ""

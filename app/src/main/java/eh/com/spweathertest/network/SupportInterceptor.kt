@@ -9,7 +9,7 @@ class SupportInterceptor : Interceptor {
 
         var request = chain.request()
         request = request?.newBuilder()
-            ?.addHeader("Authorization", "token e945ae028e2355e123cfdf1b4fbb81ad4e5b2ebc")
+            ?.addHeader("key", "d3b2c206cdfe43e4bf0140120201203")
             ?.build()
         return chain.proceed(request)
         }
